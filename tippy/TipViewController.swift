@@ -16,7 +16,7 @@ class TipViewController: UIViewController {
     @IBOutlet weak var resultContainer: UIView!
     @IBOutlet weak var tipPercentageSegmentedControl: UISegmentedControl!
 
-    private let billCacheTimeInMin = 50
+    private let billCacheTimeInMin = 10
     private let resultViewAnimDuration = 0.4
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     
@@ -109,7 +109,7 @@ class TipViewController: UIViewController {
     private func retrievePreviousBillAmountIfPossible() {
         if let previousAppCloseTime = userDefaults.objectForKey(KeyValueDBConstants.APP_CLOSE_TIME) {
             let currentDate = NSDate()
-            let addTime = (previousAppCloseTime as! NSDate).addSeconds(billCacheTimeInMin)
+            let addTime = (previousAppCloseTime as! NSDate).addMinutes(billCacheTimeInMin)
             if addTime.isGreaterThanDate(currentDate) {
                 if let previousBill = userDefaults.objectForKey(KeyValueDBConstants.APP_CLOSE_BILL_AMOUNT) {
                     let previousBillString = (previousBill as! String)
